@@ -1,8 +1,8 @@
-import contacts from "./data"
-
 const express = require("express");
 const app = express();
 const port = 3000
+
+const contacts = require('./data');
 
 // Endpoints
 app.get('/contacts', function (req, res) {
