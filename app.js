@@ -1,9 +1,8 @@
 const express = require("express");
 const cors = require("cors");
+const port = process.env.PORT || 3000;
+
 const app = express();
-
-app.set("port", (process.env.port || 3000))
-
 app.use(cors());
 
 const contacts = require('./data');
@@ -13,6 +12,6 @@ app.get('/contacts', function (req, res) {
     res.json(contacts)
 })
 
-app.listen(app.get("port"), () => {
-    console.log("The server is running")
+app.listen(port, () => {
+    console.log(`The server is running on port ${port}`)
 })
