@@ -12,7 +12,7 @@ app.use(express.json())
 
 // Endpoints
 app.get('/contacts', function (req, res) {
-    const db = `./${req.query.uid}.json`;
+    const db = `./data/${req.query.uid}.json`;
     const contacts = require(db);
     res.json(contacts)
     // console.log(req.query.uid);
@@ -23,7 +23,7 @@ app.post('/sessionLogout', (req, res) => {
 });
 // Methods
 app.post('/contacts', function (req, res) {
-    const db = `./${req.query.uid}.json`;
+    const db = `./data/${req.query.uid}.json`;
     const contacts = require(db);
     let newContact = req.body;
     contacts.contacts.push( newContact );
@@ -31,7 +31,7 @@ app.post('/contacts', function (req, res) {
     res.json('Contact has been added successfully');
 })
 app.post('/:uid', function (req, res) {
-    const userFile = `${req.params.uid}.json`;
+    const userFile = `./data/${req.params.uid}.json`;
     const blueprint = '{"contacts": []}';
     const jsonObj = JSON.parse(blueprint);
     const jsonContent = JSON.stringify(jsonObj);
@@ -45,7 +45,7 @@ app.post('/:uid', function (req, res) {
     res.json('File has been created successfully');
 })
 app.put('/contacts', function (req, res) {
-    const db = `./${req.query.uid}.json`;
+    const db = `./data/${req.query.uid}.json`;
     const contacts = require(db);
     let updatedContact = req.body;
     let foundIndex = contacts.contacts.findIndex(contact => contact.id == req.query.id);
@@ -54,7 +54,7 @@ app.put('/contacts', function (req, res) {
     res.json('Contact has been updated successfully');
 })
 app.delete('/contacts', function (req, res) {
-    const db = `./${req.query.uid}.json`;
+    const db = `./data/${req.query.uid}.json`;
     const contacts = require(db);
     let filteredContacts = contacts.contacts.filter((contact) => contact.id != req.query.id);
     contacts.contacts = filteredContacts;
